@@ -10,12 +10,17 @@ def map(array)
 end
 
 
-def reduce(array, starting_point = 0)
-  total = 0 
-  i = 0 
-  while i < array.length do
-    total = yield(total, array[i])
+def reduce(s, sp=nil)
+  if sp
+    accum = sp
+    i = 0
+  else
+    accum = s[0]
+    i = 1
+  end
+  while i < s.length
+    accum = yield(accum, s[i])
     i += 1
   end
-  starting_point + total
+  accum
 end
